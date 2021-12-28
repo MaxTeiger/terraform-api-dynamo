@@ -97,12 +97,12 @@ resource "aws_api_gateway_integration_response" "MyDemoIntegrationResponse" {
   ]
 }
 
-# resource "aws_api_gateway_deployment" "apideploy" {
-#    depends_on = [aws_api_gateway_integration.lambdaInt]
+resource "aws_api_gateway_deployment" "apideploy" {
+   depends_on = [aws_api_gateway_integration.lambdaInt]
 
-#    rest_api_id = aws_api_gateway_rest_api.apiLambda.id
-#    stage_name  = "Prod"
-# }
+   rest_api_id = aws_api_gateway_rest_api.apiLambda.id
+   stage_name  = "Prod"
+}
 
 
 # resource "aws_lambda_permission" "apigw" {
@@ -111,11 +111,11 @@ resource "aws_api_gateway_integration_response" "MyDemoIntegrationResponse" {
 #    function_name = aws_lambda_function.LambdaFunctionOverHttps.function_name
 #    principal     = "apigateway.amazonaws.com"
 
-#    source_arn = "${aws_api_gateway_rest_api.apiLambda.execution_arn}/Prod/POST/myresource"
+#    source_arn = "${aws_api_gateway_rest_api.apiLambda.execution_arn}/${aws_api_gateway_deployment.apideploy.stage_name}/POST/DynamoDBManager"
 
 # }
 
 
-# output "base_url" {
-#   value = aws_api_gateway_deployment.apideploy.invoke_url
-# }
+output "base_url" {
+  value = aws_api_gateway_deployment.apideploy.invoke_url
+}

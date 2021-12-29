@@ -18,13 +18,13 @@ resource "aws_iam_role_policy" "lambda_policy" {
   name = "lambda_policy"
   role = aws_iam_role.role_for_LDC.id
 
-  policy = file("policy.json")
+  policy = file("policies/policy.json")
 }
 
 
 resource "aws_iam_role" "role_for_LDC" {
   name = "lambda-assume-role"
-  assume_role_policy = file("assume_role_policy.json")
+  assume_role_policy = file("policies/assume_role_policy.json")
 
 }
 
